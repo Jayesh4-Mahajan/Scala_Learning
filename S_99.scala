@@ -105,9 +105,18 @@ object P03 {
     if (ls.length < n) throw new NoSuchElementException
     return ls(n)
   }
+
+  def nthRecursive[A](n: Int, ls: List[A]): A = {
+    return (n, ls) match {
+      case (0, h :: _ ) => h
+      case (n, _ :: tail) => nthRecursive(n - 1, tail)
+      case (_, Nil) => throw new NoSuchElementException
+    }
+  }
   
   def main(args: Array[String]): Unit = {
     val lst = List(1, 1, 2, 3, 5, 8);
     println(getNthIndex(2, lst));
+    println(nthRecursive(2, lst));
   }
 }
